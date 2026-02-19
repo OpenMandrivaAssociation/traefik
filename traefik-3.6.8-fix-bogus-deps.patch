@@ -1,0 +1,27 @@
+diff -up traefik-3.6.8/go.mod.omv~ traefik-3.6.8/go.mod
+--- traefik-3.6.8/go.mod.omv~	2026-02-19 23:04:45.791249982 +0100
++++ traefik-3.6.8/go.mod	2026-02-19 23:40:55.484311987 +0100
+@@ -418,6 +418,11 @@ replace (
+ 	github.com/mailgun/minheap => github.com/containous/minheap v0.0.0-20190809180810-6e71eb837595
+ )
+ 
++// Modules that have moved to new locations
++replace (
++	nhooyr.io/websocket => github.com/coder/websocket v1.8.7
++)
++
+ // ambiguous import: found package github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/http in multiple modules
+ // tencentcloud uses monorepo with multimodule but the go.mod files are incomplete.
+ exclude github.com/tencentcloud/tencentcloud-sdk-go v3.0.83+incompatible
+diff -up traefik-3.6.8/go.sum.omv~ traefik-3.6.8/go.sum
+--- traefik-3.6.8/go.sum.omv~	2026-02-19 23:39:53.582294950 +0100
++++ traefik-3.6.8/go.sum	2026-02-19 23:40:35.712977320 +0100
+@@ -297,6 +297,8 @@ github.com/client9/misspell v0.3.4/go.mo
+ github.com/cncf/udpa/go v0.0.0-20191209042840-269d4d468f6f/go.mod h1:M8M6+tZqaGXZJjfX53e64911xZQV5JYwmTeXPW+k8Sc=
+ github.com/cncf/udpa/go v0.0.0-20201120205902-5459f2c99403/go.mod h1:WmhPx2Nbnhtbo57+VJT5O0JRkEi1Wbu0z5j0R8u5Hbk=
+ github.com/cncf/xds/go v0.0.0-20210312221358-fbca930ec8ed/go.mod h1:eXthEFrGJvWHgFFCl3hGmgk+/aYT6PnTQLykKQRLhEs=
++github.com/coder/websocket v1.8.7 h1:jiep6gmlfP/yq2w1gBoubJEXL9gf8x3bp6lzzX8nJxE=
++github.com/coder/websocket v1.8.7/go.mod h1:B70DZP8IakI65RVQ51MsWP/8jndNma26DVA/nFSCgW0=
+ github.com/containerd/containerd v1.7.29 h1:90fWABQsaN9mJhGkoVnuzEY+o1XDPbg9BTC9QTAHnuE=
+ github.com/containerd/containerd v1.7.29/go.mod h1:azUkWcOvHrWvaiUjSQH0fjzuHIwSPg1WL5PshGP4Szs=
+ github.com/containerd/errdefs v1.0.0 h1:tg5yIfIlQIrxYtu9ajqY42W3lpS19XqdxRQeEwYG8PI=
