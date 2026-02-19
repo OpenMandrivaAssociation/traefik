@@ -11,6 +11,7 @@ Summary:	The Traefik application proxy
 URL:		https://doc.traefik.io/traefik
 License:	MIT
 Group:		Servers
+BuildRequires:	golang
 
 %patchlist
 traefik-3.6.8-fix-bogus-deps.patch
