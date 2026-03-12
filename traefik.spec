@@ -1,7 +1,7 @@
 %undefine _debugsource_packages
 
 Name:		traefik
-Version:	3.6.9
+Version:	3.6.10
 Release:	1
 Source0:	https://github.com/traefik/traefik/releases/download/v%{version}/traefik-v%{version}.src.tar.gz
 Source1:	vendor.tar.xz
@@ -28,6 +28,8 @@ you need.
 
 %prep
 %autosetup -p1 -c -n %{name}-%{version} -a1
+
+%conf
 go generate
 
 %build
@@ -63,6 +65,7 @@ AssertPathExists=%{_sysconfdir}/traefik/traefik.yml
 
 [Service]
 Type=notify
+EnvironmentFile=-%{_sysconfdir}/sysconfig/traefik
 ExecStart=%{_bindir}/traefik --configFile=%{_sysconfdir}/traefik/traefik.yml
 ExecReload=kill -HUP $MAINPID ; kill -USR1 $MAINPID
 User=traefik
@@ -82,13 +85,25 @@ install -c -m 755 traefik %{buildroot}%{_bindir}
 install -c -m 644 %{S:2} %{buildroot}%{_sysconfdir}/traefik/
 
 # acme storage
-touch  %{buildroot}/srv/traefik/acme.json
+touch %{buildroot}/srv/traefik/acme.json
 
 # logging
 mkdir -p %{buildroot}%{_localstatedir}/log/%{name}
 
 mkdir -p %{buildroot}%{_sysconfdir}/logrotate.d
 install -m 644 %{S:3} %{buildroot}/%{_sysconfdir}/logrotate.d/traefik
+
+mkdir -p %{buildroot}%{_sysconfdir}/sysconfig/
+cat >%{buildroot}%{_sysconfdir}/sysconfig/traefik <<EOF
+# PowerDNS API Configuration for Traefik ACME DNS-01 Challenge
+#PDNS_API_URL=http://127.0.0.1:8081
+# Keep in sync with api-key= in /etc/powerdns/pdns.conf
+#PDNS_API_KEY=your_api_key_here
+
+# Optional: Time in seconds to wait for DNS propagation before
+# Traefik checks it
+PDNS_PROPAGATION_DELAY=30
+EOF
 
 %files
 %{_bindir}/traefik
@@ -97,6 +112,7 @@ install -m 644 %{S:3} %{buildroot}/%{_sysconfdir}/logrotate.d/traefik
 %dir %{_sysconfdir}/traefik
 %config(noreplace) %{_sysconfdir}/traefik/traefik.yml
 %config(noreplace) %{_sysconfdir}/logrotate.d/traefik
-%ghost /srv/traefik/acme.json
-%dir /srv/traefik
+%config(noreplace) %verify(not md5 size mtime) %attr(600,traefik,traefik) /srv/traefik/acme.json
+%config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/sysconfig/traefik
+%dir %attr(755,traefik,traefik) /srv/traefik
 %dir /var/log/traefik
