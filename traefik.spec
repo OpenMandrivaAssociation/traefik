@@ -2,7 +2,7 @@
 
 Name:		traefik
 Version:	3.6.10
-Release:	1
+Release:	2
 Source0:	https://github.com/traefik/traefik/releases/download/v%{version}/traefik-v%{version}.src.tar.gz
 Source1:	vendor.tar.xz
 Source2:	traefik.yml
@@ -52,6 +52,7 @@ mkdir -p %{buildroot}%{_bindir} \
 cat >%{buildroot}%{_sysusersdir}/%{name}.conf <<EOF
 u	traefik	-	"HTTP reverse proxy and load balancer"	/srv/traefik	-
 m	traefik	traefik
+m	traefik	docker
 EOF
 
 cat >%{buildroot}%{_unitdir}/%{name}.service <<'EOF'
