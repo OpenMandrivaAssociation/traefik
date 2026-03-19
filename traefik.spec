@@ -1,8 +1,8 @@
 %undefine _debugsource_packages
 
 Name:		traefik
-Version:	3.6.10
-Release:	2
+Version:	3.6.11
+Release:	1
 Source0:	https://github.com/traefik/traefik/releases/download/v%{version}/traefik-v%{version}.src.tar.gz
 Source1:	vendor.tar.xz
 Source2:	traefik.yml
