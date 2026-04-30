@@ -1,7 +1,7 @@
-diff -up traefik-3.6.10/go.mod.1~ traefik-3.6.10/go.mod
---- traefik-3.6.10/go.mod.1~	2026-03-06 16:08:18.000000000 +0100
-+++ traefik-3.6.10/go.mod	2026-03-12 00:13:02.206766272 +0100
-@@ -417,6 +417,11 @@ replace (
+diff -up traefik-3.6.15/go.mod.1~ traefik-3.6.15/go.mod
+--- traefik-3.6.15/go.mod.1~	2026-04-29 15:03:32.000000000 +0200
++++ traefik-3.6.15/go.mod	2026-04-30 01:51:53.331378888 +0200
+@@ -427,6 +427,11 @@ replace (
  	github.com/mailgun/minheap => github.com/containous/minheap v0.0.0-20190809180810-6e71eb837595
  )
  
@@ -13,15 +13,24 @@ diff -up traefik-3.6.10/go.mod.1~ traefik-3.6.10/go.mod
  // ambiguous import: found package github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/http in multiple modules
  // tencentcloud uses monorepo with multimodule but the go.mod files are incomplete.
  exclude github.com/tencentcloud/tencentcloud-sdk-go v3.0.83+incompatible
-diff -up traefik-3.6.10/go.sum.1~ traefik-3.6.10/go.sum
---- traefik-3.6.10/go.sum.1~	2026-03-06 16:08:18.000000000 +0100
-+++ traefik-3.6.10/go.sum	2026-03-12 00:14:14.911333222 +0100
-@@ -295,6 +295,8 @@ github.com/cloudwego/iasm v0.2.0/go.mod
- github.com/cncf/udpa/go v0.0.0-20191209042840-269d4d468f6f/go.mod h1:M8M6+tZqaGXZJjfX53e64911xZQV5JYwmTeXPW+k8Sc=
- github.com/cncf/udpa/go v0.0.0-20201120205902-5459f2c99403/go.mod h1:WmhPx2Nbnhtbo57+VJT5O0JRkEi1Wbu0z5j0R8u5Hbk=
- github.com/cncf/xds/go v0.0.0-20210312221358-fbca930ec8ed/go.mod h1:eXthEFrGJvWHgFFCl3hGmgk+/aYT6PnTQLykKQRLhEs=
+diff -up traefik-3.6.15/go.sum.1~ traefik-3.6.15/go.sum
+--- traefik-3.6.15/go.sum.1~	2026-04-29 15:03:32.000000000 +0200
++++ traefik-3.6.15/go.sum	2026-04-30 01:53:19.995342589 +0200
+@@ -888,6 +888,8 @@ github.com/cncf/xds/go v0.0.0-2021101117
+ github.com/cncf/xds/go v0.0.0-20220314180256-7f1daf1720fc/go.mod h1:eXthEFrGJvWHgFFCl3hGmgk+/aYT6PnTQLykKQRLhEs=
+ github.com/cncf/xds/go v0.0.0-20230105202645-06c439db220b/go.mod h1:eXthEFrGJvWHgFFCl3hGmgk+/aYT6PnTQLykKQRLhEs=
+ github.com/cncf/xds/go v0.0.0-20230310173818-32f1caf87195/go.mod h1:eXthEFrGJvWHgFFCl3hGmgk+/aYT6PnTQLykKQRLhEs=
 +github.com/coder/websocket v1.8.7 h1:jiep6gmlfP/yq2w1gBoubJEXL9gf8x3bp6lzzX8nJxE=
 +github.com/coder/websocket v1.8.7/go.mod h1:B70DZP8IakI65RVQ51MsWP/8jndNma26DVA/nFSCgW0=
  github.com/containerd/errdefs v1.0.0 h1:tg5yIfIlQIrxYtu9ajqY42W3lpS19XqdxRQeEwYG8PI=
  github.com/containerd/errdefs v1.0.0/go.mod h1:+YBYIdtsnF4Iw6nWZhJcqGSg/dwvV7tyJ/kCkyJ2k+M=
  github.com/containerd/errdefs/pkg v0.3.0 h1:9IKJ06FvyNlexW690DXuQNx2KA2cUJXx151Xdx3ZPPE=
+@@ -1527,7 +1529,7 @@ github.com/linode/linodego v1.68.0/go.mo
+ github.com/liquidweb/go-lwApi v0.0.0-20190605172801-52a4864d2738/go.mod h1:0sYF9rMXb0vlG+4SzdiGMXHheCZxjguMq+Zb4S2BfBs=
+ github.com/liquidweb/go-lwApi v0.0.5/go.mod h1:0sYF9rMXb0vlG+4SzdiGMXHheCZxjguMq+Zb4S2BfBs=
+ github.com/liquidweb/liquidweb-cli v0.6.9/go.mod h1:cE1uvQ+x24NGUL75D0QagOFCG8Wdvmwu8aL9TLmA/eQ=
+-github.com/liquidweb/liquidweb-cli v0.7.0 h1:7j1r1U0MZa1TXiWo3IMU5V1YQwnBHMVxU+xLsgDcu6Q=
++github.com/liquidweb/liquidweb-cli v0.7.0 h1:H+tBJWNa/sFSUf5UIc7pRcWkZF8lYcdYOUGOwCzz/Fg=
+ github.com/liquidweb/liquidweb-cli v0.7.0/go.mod h1:+uU7L6BhaQtgo4cYKhhsP5UNCq/imNvjBjlf76Vqpb0=
+ github.com/liquidweb/liquidweb-go v1.6.4 h1:6S0m3hHSpiLqGD7AFSb7lH/W/qr1wx+tKil9fgIbjMc=
+ github.com/liquidweb/liquidweb-go v1.6.4/go.mod h1:B934JPIIcdA+uTq2Nz5PgOtG6CuCaEvQKe/Ge/5GgZ4=
