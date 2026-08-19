@@ -5,7 +5,7 @@
 %global traefik_webuidir %{_datadir}/traefik/webui
 
 Name:		traefik
-Version:	3.7.9
+Version:	3.7.11
 Release:	1
 Source0:	https://github.com/traefik/traefik/releases/download/v%{version}/traefik-v%{version}.src.tar.gz
 Source1:	vendor.tar.xz
@@ -18,16 +18,16 @@ Group:		Servers
 BuildRequires:	golang
 
 # Full install pulls in the core binary and every module package.
-Requires:	traefik-core = %{version}-%{release}
-Requires:	traefik-mod-docker = %{version}-%{release}
-Requires:	traefik-mod-kubernetes = %{version}-%{release}
-Requires:	traefik-mod-consul = %{version}-%{release}
-Requires:	traefik-mod-nomad = %{version}-%{release}
-Requires:	traefik-mod-etcd = %{version}-%{release}
-Requires:	traefik-mod-redis = %{version}-%{release}
-Requires:	traefik-mod-zookeeper = %{version}-%{release}
-Requires:	traefik-mod-ecs = %{version}-%{release}
-Requires:	traefik-mod-webui = %{version}-%{release}
+Requires:	traefik-core = %{EVRD}
+Requires:	traefik-mod-docker = %{EVRD}
+Requires:	traefik-mod-kubernetes = %{EVRD}
+Requires:	traefik-mod-consul = %{EVRD}
+Requires:	traefik-mod-nomad = %{EVRD}
+Requires:	traefik-mod-etcd = %{EVRD}
+Requires:	traefik-mod-redis = %{EVRD}
+Requires:	traefik-mod-zookeeper = %{EVRD}
+Requires:	traefik-mod-ecs = %{EVRD}
+Requires:	traefik-mod-webui = %{EVRD}
 
 %patchlist
 traefik-3.6.8-fix-bogus-deps.patch
@@ -46,8 +46,8 @@ traefik-core and only the module packages you need.
 Summary:	Traefik core reverse proxy binary and service
 Group:		Servers
 Requires(pre):	shadow-utils
-Recommends:	traefik-mod-docker = %{version}-%{release}
-Recommends:	traefik-mod-webui = %{version}-%{release}
+Recommends:	traefik-mod-docker = %{EVRD}
+Recommends:	traefik-mod-webui = %{EVRD}
 
 %description core
 Core Traefik reverse proxy binary, systemd unit, and configuration.
@@ -58,7 +58,7 @@ traefik-mod-* packages as shared objects under %{traefik_moddir}.
 %package mod-docker
 Summary:	Traefik Docker and Swarm provider modules
 Group:		Servers
-Requires:	traefik-core = %{version}-%{release}
+Requires:	traefik-core = %{EVRD}
 
 %description mod-docker
 Loadable modules for Docker container discovery and Docker Swarm service
@@ -67,7 +67,7 @@ discovery (traefik-docker.so, traefik-swarm.so).
 %package mod-kubernetes
 Summary:	Traefik Kubernetes provider modules
 Group:		Servers
-Requires:	traefik-core = %{version}-%{release}
+Requires:	traefik-core = %{EVRD}
 
 %description mod-kubernetes
 Loadable modules for Kubernetes CRD, Ingress, Gateway API, Ingress-NGINX
@@ -76,7 +76,7 @@ compatibility, and Knative providers.
 %package mod-consul
 Summary:	Traefik Consul provider modules
 Group:		Servers
-Requires:	traefik-core = %{version}-%{release}
+Requires:	traefik-core = %{EVRD}
 
 %description mod-consul
 Loadable modules for Consul Catalog and Consul KV providers.
@@ -84,7 +84,7 @@ Loadable modules for Consul Catalog and Consul KV providers.
 %package mod-nomad
 Summary:	Traefik Nomad provider module
 Group:		Servers
-Requires:	traefik-core = %{version}-%{release}
+Requires:	traefik-core = %{EVRD}
 
 %description mod-nomad
 Loadable module for HashiCorp Nomad service discovery.
@@ -92,7 +92,7 @@ Loadable module for HashiCorp Nomad service discovery.
 %package mod-etcd
 Summary:	Traefik etcd provider module
 Group:		Servers
-Requires:	traefik-core = %{version}-%{release}
+Requires:	traefik-core = %{EVRD}
 
 %description mod-etcd
 Loadable module for etcd key-value configuration provider.
@@ -100,7 +100,7 @@ Loadable module for etcd key-value configuration provider.
 %package mod-redis
 Summary:	Traefik Redis provider module
 Group:		Servers
-Requires:	traefik-core = %{version}-%{release}
+Requires:	traefik-core = %{EVRD}
 
 %description mod-redis
 Loadable module for Redis key-value configuration provider.
@@ -108,7 +108,7 @@ Loadable module for Redis key-value configuration provider.
 %package mod-zookeeper
 Summary:	Traefik ZooKeeper provider module
 Group:		Servers
-Requires:	traefik-core = %{version}-%{release}
+Requires:	traefik-core = %{EVRD}
 
 %description mod-zookeeper
 Loadable module for ZooKeeper key-value configuration provider.
@@ -116,7 +116,7 @@ Loadable module for ZooKeeper key-value configuration provider.
 %package mod-ecs
 Summary:	Traefik AWS ECS provider module
 Group:		Servers
-Requires:	traefik-core = %{version}-%{release}
+Requires:	traefik-core = %{EVRD}
 
 %description mod-ecs
 Loadable module for AWS ECS service discovery.
@@ -124,7 +124,7 @@ Loadable module for AWS ECS service discovery.
 %package mod-webui
 Summary:	Traefik dashboard WebUI module and assets
 Group:		Servers
-Requires:	traefik-core = %{version}-%{release}
+Requires:	traefik-core = %{EVRD}
 
 %description mod-webui
 Dashboard web interface: static assets under %{traefik_webuidir} and the
