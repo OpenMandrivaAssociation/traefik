@@ -160,3 +160,15 @@ providers:
 #      storage: /var/lib/traefik/acme-dns.json
 #      dnsChallenge:
 #        provider: ???????
+
+# --------------------------------------------------------------------------
+# Loadable module system
+# See MODULES_REPORT.md — optional providers ship as .so files here.
+# --------------------------------------------------------------------------
+modules:
+  # Directory scanned for traefik-*.so provider modules
+  dir: /usr/lib/traefik/modules
+  # Unload idle non-essential modules after this duration
+  idleTimeout: 10m
+  # How often to check for idle modules
+  checkInterval: 1m
