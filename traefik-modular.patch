@@ -1,6 +1,6 @@
 diff -ruN a/MODULES_REPORT.md b/MODULES_REPORT.md
 --- a/MODULES_REPORT.md	1970-01-01 01:00:00.000000000 +0100
-+++ b/MODULES_REPORT.md	2026-08-19 21:21:46.200049926 +0200
++++ b/MODULES_REPORT.md	2026-08-31 21:01:21.548926553 +0200
 @@ -0,0 +1,330 @@
 +# Traefik Modular Architecture — Design Report
 +
@@ -333,8 +333,8 @@ diff -ruN a/MODULES_REPORT.md b/MODULES_REPORT.md
 +
 +6. **WASM modules**: Extend the loader to support WebAssembly modules alongside Go plugins, for cross-platform module distribution.
 diff -ruN a/cmd/traefik/traefik.go b/cmd/traefik/traefik.go
---- a/cmd/traefik/traefik.go	2026-08-19 08:44:17.000000000 +0200
-+++ b/cmd/traefik/traefik.go	2026-08-19 21:21:46.200153705 +0200
+--- a/cmd/traefik/traefik.go	2026-08-26 15:41:51.000000000 +0200
++++ b/cmd/traefik/traefik.go	2026-08-31 21:01:21.549110945 +0200
 @@ -35,6 +35,7 @@
  	"github.com/traefik/traefik/v3/pkg/observability/metrics"
  	"github.com/traefik/traefik/v3/pkg/observability/tracing"
@@ -436,8 +436,8 @@ diff -ruN a/cmd/traefik/traefik.go b/cmd/traefik/traefik.go
  
  func getHTTPChallengeHandler(acmeProviders []*acme.Provider, httpChallengeProvider http.Handler) http.Handler {
 diff -ruN a/pkg/api/dashboard/dashboard.go b/pkg/api/dashboard/dashboard.go
---- a/pkg/api/dashboard/dashboard.go	2026-08-19 08:44:17.000000000 +0200
-+++ b/pkg/api/dashboard/dashboard.go	2026-08-19 21:21:46.200244243 +0200
+--- a/pkg/api/dashboard/dashboard.go	2026-08-26 15:41:51.000000000 +0200
++++ b/pkg/api/dashboard/dashboard.go	2026-08-31 21:01:21.549183286 +0200
 @@ -24,6 +24,21 @@
  	assets fs.FS // optional assets, to override the webui.FS default
  }
@@ -461,8 +461,8 @@ diff -ruN a/pkg/api/dashboard/dashboard.go b/pkg/api/dashboard/dashboard.go
  	assets := h.assets
  	if assets == nil {
 diff -ruN a/pkg/config/static/static_config.go b/pkg/config/static/static_config.go
---- a/pkg/config/static/static_config.go	2026-08-19 08:44:17.000000000 +0200
-+++ b/pkg/config/static/static_config.go	2026-08-19 21:21:46.200315640 +0200
+--- a/pkg/config/static/static_config.go	2026-08-26 15:41:51.000000000 +0200
++++ b/pkg/config/static/static_config.go	2026-08-31 21:01:21.549242706 +0200
 @@ -110,6 +110,27 @@
  	Spiffe *SpiffeClientConfig `description:"SPIFFE integration configuration." json:"spiffe,omitempty" toml:"spiffe,omitempty" yaml:"spiffe,omitempty" export:"true"`
  
@@ -493,7 +493,7 @@ diff -ruN a/pkg/config/static/static_config.go b/pkg/config/static/static_config
  // Core configures Traefik core behavior.
 diff -ruN a/pkg/modules/aggregator.go b/pkg/modules/aggregator.go
 --- a/pkg/modules/aggregator.go	1970-01-01 01:00:00.000000000 +0100
-+++ b/pkg/modules/aggregator.go	2026-08-19 21:21:46.200397687 +0200
++++ b/pkg/modules/aggregator.go	2026-08-31 21:01:21.549301517 +0200
 @@ -0,0 +1,96 @@
 +package modules
 +
@@ -593,7 +593,7 @@ diff -ruN a/pkg/modules/aggregator.go b/pkg/modules/aggregator.go
 +}
 diff -ruN a/pkg/modules/builtin.go b/pkg/modules/builtin.go
 --- a/pkg/modules/builtin.go	1970-01-01 01:00:00.000000000 +0100
-+++ b/pkg/modules/builtin.go	2026-08-19 21:21:46.200451802 +0200
++++ b/pkg/modules/builtin.go	2026-08-31 21:01:21.549345247 +0200
 @@ -0,0 +1,193 @@
 +package modules
 +
@@ -790,7 +790,7 @@ diff -ruN a/pkg/modules/builtin.go b/pkg/modules/builtin.go
 +}
 diff -ruN a/pkg/modules/constructors.go b/pkg/modules/constructors.go
 --- a/pkg/modules/constructors.go	1970-01-01 01:00:00.000000000 +0100
-+++ b/pkg/modules/constructors.go	2026-08-19 21:21:46.200514408 +0200
++++ b/pkg/modules/constructors.go	2026-08-31 21:01:21.549393128 +0200
 @@ -0,0 +1,223 @@
 +package modules
 +
@@ -1017,7 +1017,7 @@ diff -ruN a/pkg/modules/constructors.go b/pkg/modules/constructors.go
 +}
 diff -ruN a/pkg/modules/loader.go b/pkg/modules/loader.go
 --- a/pkg/modules/loader.go	1970-01-01 01:00:00.000000000 +0100
-+++ b/pkg/modules/loader.go	2026-08-19 21:21:46.200565552 +0200
++++ b/pkg/modules/loader.go	2026-08-31 21:01:21.549431688 +0200
 @@ -0,0 +1,124 @@
 +package modules
 +
@@ -1145,7 +1145,7 @@ diff -ruN a/pkg/modules/loader.go b/pkg/modules/loader.go
 +}
 diff -ruN a/pkg/modules/manager.go b/pkg/modules/manager.go
 --- a/pkg/modules/manager.go	1970-01-01 01:00:00.000000000 +0100
-+++ b/pkg/modules/manager.go	2026-08-19 21:21:46.200628748 +0200
++++ b/pkg/modules/manager.go	2026-08-31 21:01:21.549481039 +0200
 @@ -0,0 +1,276 @@
 +package modules
 +
@@ -1425,7 +1425,7 @@ diff -ruN a/pkg/modules/manager.go b/pkg/modules/manager.go
 +}
 diff -ruN a/pkg/modules/mod_dashboard.go b/pkg/modules/mod_dashboard.go
 --- a/pkg/modules/mod_dashboard.go	1970-01-01 01:00:00.000000000 +0100
-+++ b/pkg/modules/mod_dashboard.go	2026-08-19 21:21:46.200688123 +0200
++++ b/pkg/modules/mod_dashboard.go	2026-08-31 21:01:21.549528599 +0200
 @@ -0,0 +1,150 @@
 +package modules
 +
@@ -1579,7 +1579,7 @@ diff -ruN a/pkg/modules/mod_dashboard.go b/pkg/modules/mod_dashboard.go
 +}
 diff -ruN a/pkg/modules/mod_provider.go b/pkg/modules/mod_provider.go
 --- a/pkg/modules/mod_provider.go	1970-01-01 01:00:00.000000000 +0100
-+++ b/pkg/modules/mod_provider.go	2026-08-19 21:21:46.200728017 +0200
++++ b/pkg/modules/mod_provider.go	2026-08-31 21:01:21.549559980 +0200
 @@ -0,0 +1,89 @@
 +package modules
 +
@@ -1672,7 +1672,7 @@ diff -ruN a/pkg/modules/mod_provider.go b/pkg/modules/mod_provider.go
 +}
 diff -ruN a/pkg/modules/mod_webui.go b/pkg/modules/mod_webui.go
 --- a/pkg/modules/mod_webui.go	1970-01-01 01:00:00.000000000 +0100
-+++ b/pkg/modules/mod_webui.go	2026-08-19 21:21:46.200771221 +0200
++++ b/pkg/modules/mod_webui.go	2026-08-31 21:01:21.549593430 +0200
 @@ -0,0 +1,133 @@
 +package modules
 +
@@ -1809,7 +1809,7 @@ diff -ruN a/pkg/modules/mod_webui.go b/pkg/modules/mod_webui.go
 +}
 diff -ruN a/pkg/modules/module.go b/pkg/modules/module.go
 --- a/pkg/modules/module.go	1970-01-01 01:00:00.000000000 +0100
-+++ b/pkg/modules/module.go	2026-08-19 21:21:46.200820585 +0200
++++ b/pkg/modules/module.go	2026-08-31 21:01:21.549630231 +0200
 @@ -0,0 +1,131 @@
 +package modules
 +
@@ -1944,7 +1944,7 @@ diff -ruN a/pkg/modules/module.go b/pkg/modules/module.go
 +}
 diff -ruN a/pkg/modules/module_test.go b/pkg/modules/module_test.go
 --- a/pkg/modules/module_test.go	1970-01-01 01:00:00.000000000 +0100
-+++ b/pkg/modules/module_test.go	2026-08-19 21:21:46.200923704 +0200
++++ b/pkg/modules/module_test.go	2026-08-31 21:01:21.549709451 +0200
 @@ -0,0 +1,538 @@
 +package modules
 +
@@ -2486,7 +2486,7 @@ diff -ruN a/pkg/modules/module_test.go b/pkg/modules/module_test.go
 +}
 diff -ruN a/pkg/modules/multi_provider.go b/pkg/modules/multi_provider.go
 --- a/pkg/modules/multi_provider.go	1970-01-01 01:00:00.000000000 +0100
-+++ b/pkg/modules/multi_provider.go	2026-08-19 21:21:46.200977089 +0200
++++ b/pkg/modules/multi_provider.go	2026-08-31 21:01:21.549747202 +0200
 @@ -0,0 +1,51 @@
 +package modules
 +
@@ -2541,7 +2541,7 @@ diff -ruN a/pkg/modules/multi_provider.go b/pkg/modules/multi_provider.go
 +)
 diff -ruN a/pkg/modules/registry.go b/pkg/modules/registry.go
 --- a/pkg/modules/registry.go	1970-01-01 01:00:00.000000000 +0100
-+++ b/pkg/modules/registry.go	2026-08-19 21:21:46.201021463 +0200
++++ b/pkg/modules/registry.go	2026-08-31 21:01:21.549779152 +0200
 @@ -0,0 +1,128 @@
 +package modules
 +
@@ -2672,8 +2672,8 @@ diff -ruN a/pkg/modules/registry.go b/pkg/modules/registry.go
 +	delete(r.modules, name)
 +}
 diff -ruN a/pkg/provider/aggregator/aggregator.go b/pkg/provider/aggregator/aggregator.go
---- a/pkg/provider/aggregator/aggregator.go	2026-08-19 08:44:17.000000000 +0200
-+++ b/pkg/provider/aggregator/aggregator.go	2026-08-19 21:21:46.201064177 +0200
+--- a/pkg/provider/aggregator/aggregator.go	2026-08-26 15:41:51.000000000 +0200
++++ b/pkg/provider/aggregator/aggregator.go	2026-08-31 21:01:21.549811143 +0200
 @@ -67,11 +67,23 @@
  	providersThrottleDuration time.Duration
  }
@@ -2702,8 +2702,8 @@ diff -ruN a/pkg/provider/aggregator/aggregator.go b/pkg/provider/aggregator/aggr
  	if conf.File != nil {
  		p.quietAddProvider(conf.File)
 diff -ruN a/pkg/server/routerfactory_test.go b/pkg/server/routerfactory_test.go
---- a/pkg/server/routerfactory_test.go	2026-08-19 08:44:17.000000000 +0200
-+++ b/pkg/server/routerfactory_test.go	2026-08-19 21:21:46.201114142 +0200
+--- a/pkg/server/routerfactory_test.go	2026-08-26 15:41:51.000000000 +0200
++++ b/pkg/server/routerfactory_test.go	2026-08-31 21:01:21.549851513 +0200
 @@ -54,7 +54,7 @@
  	transportManager := service.NewTransportManager(nil)
  	transportManager.Update(map[string]*dynamic.ServersTransport{"default@internal": {}})
@@ -2741,8 +2741,8 @@ diff -ruN a/pkg/server/routerfactory_test.go b/pkg/server/routerfactory_test.go
  	dialerManager := tcp.NewDialerManager(nil)
  	dialerManager.Update(map[string]*dynamic.TCPServersTransport{"default@internal": {}})
 diff -ruN a/pkg/server/server.go b/pkg/server/server.go
---- a/pkg/server/server.go	2026-08-19 08:44:17.000000000 +0200
-+++ b/pkg/server/server.go	2026-08-19 21:21:46.201171907 +0200
+--- a/pkg/server/server.go	2026-08-26 15:41:51.000000000 +0200
++++ b/pkg/server/server.go	2026-08-31 21:01:21.549896134 +0200
 @@ -8,6 +8,7 @@
  	"time"
  
@@ -2798,8 +2798,8 @@ diff -ruN a/pkg/server/server.go b/pkg/server/server.go
  	metrics.StopDatadog()
  	metrics.StopStatsd()
 diff -ruN a/pkg/server/service/managerfactory.go b/pkg/server/service/managerfactory.go
---- a/pkg/server/service/managerfactory.go	2026-08-19 08:44:17.000000000 +0200
-+++ b/pkg/server/service/managerfactory.go	2026-08-19 21:21:46.201223831 +0200
+--- a/pkg/server/service/managerfactory.go	2026-08-26 15:41:51.000000000 +0200
++++ b/pkg/server/service/managerfactory.go	2026-08-31 21:01:21.549941324 +0200
 @@ -1,6 +1,8 @@
  package service
  
@@ -2887,7 +2887,7 @@ diff -ruN a/pkg/server/service/managerfactory.go b/pkg/server/service/managerfac
  		} else {
 diff -ruN a/plugins/consul/plugin.go b/plugins/consul/plugin.go
 --- a/plugins/consul/plugin.go	1970-01-01 01:00:00.000000000 +0100
-+++ b/plugins/consul/plugin.go	2026-08-19 21:21:46.201262605 +0200
++++ b/plugins/consul/plugin.go	2026-08-31 21:01:21.549975664 +0200
 @@ -0,0 +1,9 @@
 +// Package main builds the consul Traefik module as a Go plugin (.so).
 +package main
@@ -2900,7 +2900,7 @@ diff -ruN a/plugins/consul/plugin.go b/plugins/consul/plugin.go
 +}
 diff -ruN a/plugins/consul-catalog/plugin.go b/plugins/consul-catalog/plugin.go
 --- a/plugins/consul-catalog/plugin.go	1970-01-01 01:00:00.000000000 +0100
-+++ b/plugins/consul-catalog/plugin.go	2026-08-19 21:21:46.201291127 +0200
++++ b/plugins/consul-catalog/plugin.go	2026-08-31 21:01:21.549998685 +0200
 @@ -0,0 +1,9 @@
 +// Package main builds the consul-catalog Traefik module as a Go plugin (.so).
 +package main
@@ -2913,7 +2913,7 @@ diff -ruN a/plugins/consul-catalog/plugin.go b/plugins/consul-catalog/plugin.go
 +}
 diff -ruN a/plugins/docker/plugin.go b/plugins/docker/plugin.go
 --- a/plugins/docker/plugin.go	1970-01-01 01:00:00.000000000 +0100
-+++ b/plugins/docker/plugin.go	2026-08-19 21:21:46.201316920 +0200
++++ b/plugins/docker/plugin.go	2026-08-31 21:01:21.550021465 +0200
 @@ -0,0 +1,9 @@
 +// Package main builds the docker Traefik module as a Go plugin (.so).
 +package main
@@ -2926,7 +2926,7 @@ diff -ruN a/plugins/docker/plugin.go b/plugins/docker/plugin.go
 +}
 diff -ruN a/plugins/ecs/plugin.go b/plugins/ecs/plugin.go
 --- a/plugins/ecs/plugin.go	1970-01-01 01:00:00.000000000 +0100
-+++ b/plugins/ecs/plugin.go	2026-08-19 21:21:46.201341462 +0200
++++ b/plugins/ecs/plugin.go	2026-08-31 21:01:21.550042845 +0200
 @@ -0,0 +1,9 @@
 +// Package main builds the ecs Traefik module as a Go plugin (.so).
 +package main
@@ -2939,7 +2939,7 @@ diff -ruN a/plugins/ecs/plugin.go b/plugins/ecs/plugin.go
 +}
 diff -ruN a/plugins/etcd/plugin.go b/plugins/etcd/plugin.go
 --- a/plugins/etcd/plugin.go	1970-01-01 01:00:00.000000000 +0100
-+++ b/plugins/etcd/plugin.go	2026-08-19 21:21:46.201365164 +0200
++++ b/plugins/etcd/plugin.go	2026-08-31 21:01:21.550063095 +0200
 @@ -0,0 +1,9 @@
 +// Package main builds the etcd Traefik module as a Go plugin (.so).
 +package main
@@ -2952,7 +2952,7 @@ diff -ruN a/plugins/etcd/plugin.go b/plugins/etcd/plugin.go
 +}
 diff -ruN a/plugins/knative/plugin.go b/plugins/knative/plugin.go
 --- a/plugins/knative/plugin.go	1970-01-01 01:00:00.000000000 +0100
-+++ b/plugins/knative/plugin.go	2026-08-19 21:21:46.201390756 +0200
++++ b/plugins/knative/plugin.go	2026-08-31 21:01:21.550084836 +0200
 @@ -0,0 +1,9 @@
 +// Package main builds the knative Traefik module as a Go plugin (.so).
 +package main
@@ -2965,7 +2965,7 @@ diff -ruN a/plugins/knative/plugin.go b/plugins/knative/plugin.go
 +}
 diff -ruN a/plugins/kubernetes-crd/plugin.go b/plugins/kubernetes-crd/plugin.go
 --- a/plugins/kubernetes-crd/plugin.go	1970-01-01 01:00:00.000000000 +0100
-+++ b/plugins/kubernetes-crd/plugin.go	2026-08-19 21:21:46.201415309 +0200
++++ b/plugins/kubernetes-crd/plugin.go	2026-08-31 21:01:21.550106756 +0200
 @@ -0,0 +1,9 @@
 +// Package main builds the kubernetes-crd Traefik module as a Go plugin (.so).
 +package main
@@ -2978,7 +2978,7 @@ diff -ruN a/plugins/kubernetes-crd/plugin.go b/plugins/kubernetes-crd/plugin.go
 +}
 diff -ruN a/plugins/kubernetes-gateway/plugin.go b/plugins/kubernetes-gateway/plugin.go
 --- a/plugins/kubernetes-gateway/plugin.go	1970-01-01 01:00:00.000000000 +0100
-+++ b/plugins/kubernetes-gateway/plugin.go	2026-08-19 21:21:46.201440591 +0200
++++ b/plugins/kubernetes-gateway/plugin.go	2026-08-31 21:01:21.550131966 +0200
 @@ -0,0 +1,9 @@
 +// Package main builds the kubernetes-gateway Traefik module as a Go plugin (.so).
 +package main
@@ -2991,7 +2991,7 @@ diff -ruN a/plugins/kubernetes-gateway/plugin.go b/plugins/kubernetes-gateway/pl
 +}
 diff -ruN a/plugins/kubernetes-ingress/plugin.go b/plugins/kubernetes-ingress/plugin.go
 --- a/plugins/kubernetes-ingress/plugin.go	1970-01-01 01:00:00.000000000 +0100
-+++ b/plugins/kubernetes-ingress/plugin.go	2026-08-19 21:21:46.201466703 +0200
++++ b/plugins/kubernetes-ingress/plugin.go	2026-08-31 21:01:21.550152926 +0200
 @@ -0,0 +1,9 @@
 +// Package main builds the kubernetes-ingress Traefik module as a Go plugin (.so).
 +package main
@@ -3004,7 +3004,7 @@ diff -ruN a/plugins/kubernetes-ingress/plugin.go b/plugins/kubernetes-ingress/pl
 +}
 diff -ruN a/plugins/kubernetes-ingress-nginx/plugin.go b/plugins/kubernetes-ingress-nginx/plugin.go
 --- a/plugins/kubernetes-ingress-nginx/plugin.go	1970-01-01 01:00:00.000000000 +0100
-+++ b/plugins/kubernetes-ingress-nginx/plugin.go	2026-08-19 21:21:46.201492006 +0200
++++ b/plugins/kubernetes-ingress-nginx/plugin.go	2026-08-31 21:01:21.550205747 +0200
 @@ -0,0 +1,9 @@
 +// Package main builds the kubernetes-ingress-nginx Traefik module as a Go plugin (.so).
 +package main
@@ -3017,7 +3017,7 @@ diff -ruN a/plugins/kubernetes-ingress-nginx/plugin.go b/plugins/kubernetes-ingr
 +}
 diff -ruN a/plugins/nomad/plugin.go b/plugins/nomad/plugin.go
 --- a/plugins/nomad/plugin.go	1970-01-01 01:00:00.000000000 +0100
-+++ b/plugins/nomad/plugin.go	2026-08-19 21:21:46.201518468 +0200
++++ b/plugins/nomad/plugin.go	2026-08-31 21:01:21.550252638 +0200
 @@ -0,0 +1,9 @@
 +// Package main builds the nomad Traefik module as a Go plugin (.so).
 +package main
@@ -3030,7 +3030,7 @@ diff -ruN a/plugins/nomad/plugin.go b/plugins/nomad/plugin.go
 +}
 diff -ruN a/plugins/redis/plugin.go b/plugins/redis/plugin.go
 --- a/plugins/redis/plugin.go	1970-01-01 01:00:00.000000000 +0100
-+++ b/plugins/redis/plugin.go	2026-08-19 21:21:46.201543270 +0200
++++ b/plugins/redis/plugin.go	2026-08-31 21:01:21.550283038 +0200
 @@ -0,0 +1,9 @@
 +// Package main builds the redis Traefik module as a Go plugin (.so).
 +package main
@@ -3043,7 +3043,7 @@ diff -ruN a/plugins/redis/plugin.go b/plugins/redis/plugin.go
 +}
 diff -ruN a/plugins/swarm/plugin.go b/plugins/swarm/plugin.go
 --- a/plugins/swarm/plugin.go	1970-01-01 01:00:00.000000000 +0100
-+++ b/plugins/swarm/plugin.go	2026-08-19 21:21:46.201567462 +0200
++++ b/plugins/swarm/plugin.go	2026-08-31 21:01:21.550309708 +0200
 @@ -0,0 +1,9 @@
 +// Package main builds the swarm Traefik module as a Go plugin (.so).
 +package main
@@ -3056,7 +3056,7 @@ diff -ruN a/plugins/swarm/plugin.go b/plugins/swarm/plugin.go
 +}
 diff -ruN a/plugins/webui/plugin.go b/plugins/webui/plugin.go
 --- a/plugins/webui/plugin.go	1970-01-01 01:00:00.000000000 +0100
-+++ b/plugins/webui/plugin.go	2026-08-19 21:21:46.201591484 +0200
++++ b/plugins/webui/plugin.go	2026-08-31 21:01:21.550335029 +0200
 @@ -0,0 +1,9 @@
 +// Package main builds the webui Traefik module as a Go plugin (.so).
 +package main
@@ -3069,7 +3069,7 @@ diff -ruN a/plugins/webui/plugin.go b/plugins/webui/plugin.go
 +}
 diff -ruN a/plugins/zookeeper/plugin.go b/plugins/zookeeper/plugin.go
 --- a/plugins/zookeeper/plugin.go	1970-01-01 01:00:00.000000000 +0100
-+++ b/plugins/zookeeper/plugin.go	2026-08-19 21:21:46.201620877 +0200
++++ b/plugins/zookeeper/plugin.go	2026-08-31 21:01:21.550364849 +0200
 @@ -0,0 +1,9 @@
 +// Package main builds the zookeeper Traefik module as a Go plugin (.so).
 +package main

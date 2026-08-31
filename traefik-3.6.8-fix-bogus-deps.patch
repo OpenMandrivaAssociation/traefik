@@ -1,19 +1,15 @@
-diff -up traefik-3.7.11/go.mod.deps~ traefik-3.7.11/go.mod
---- traefik-3.7.11/go.mod.deps~	2026-08-19 08:44:17.000000000 +0200
-+++ traefik-3.7.11/go.mod	2026-08-19 21:23:01.020239792 +0200
-@@ -4,9 +4,9 @@ go 1.26.0
+--- traefik-3.7.12/go.mod	2026-08-26 15:41:51.000000000 +0200
++++ traefik-3.7.12/go.mod	2026-08-31 21:03:25.990979671 +0200
+@@ -4,7 +4,7 @@ go 1.26.0
  
  require (
  	github.com/BurntSushi/toml v1.6.0
 -	github.com/Masterminds/sprig/v3 v3.2.3
 +	github.com/Masterminds/sprig/v3 v3.3.0
  	github.com/abbot/go-http-auth v0.0.0-00010101000000-000000000000 // No tag on the repo.
--	github.com/andybalholm/brotli v1.2.0
-+	github.com/andybalholm/brotli v1.2.2
+ 	github.com/andybalholm/brotli v1.2.2
  	github.com/armon/go-socks5 v0.0.0-20160902184237-e75332964ef5
- 	github.com/aws/aws-sdk-go-v2 v1.42.1
- 	github.com/aws/aws-sdk-go-v2/config v1.32.30
-@@ -30,16 +30,16 @@ require (
+@@ -30,14 +30,14 @@ require (
  	github.com/google/go-github/v90 v90.0.0
  	github.com/gorilla/mux v1.8.1
  	github.com/gorilla/websocket v1.5.4-0.20250319132907-e064f32e3674 // No tag on the repo.
@@ -28,11 +24,8 @@ diff -up traefik-3.7.11/go.mod.deps~ traefik-3.7.11/go.mod
 -	github.com/influxdata/influxdb-client-go/v2 v2.7.0
 +	github.com/influxdata/influxdb-client-go/v2 v2.14.0
  	github.com/influxdata/influxdb1-client v0.0.0-20200827194710-b269163b24ab // No tag on the repo.
--	github.com/klauspost/compress v1.18.7
-+	github.com/klauspost/compress v1.19.0
+ 	github.com/klauspost/compress v1.19.1
  	github.com/kvtools/consul v1.0.2
- 	github.com/kvtools/etcdv3 v1.0.3
- 	github.com/kvtools/redis v1.2.1
 @@ -52,16 +52,16 @@ require (
  	github.com/moby/moby/api v1.54.1
  	github.com/moby/moby/client v0.4.0
@@ -68,11 +61,10 @@ diff -up traefik-3.7.11/go.mod.deps~ traefik-3.7.11/go.mod
  	github.com/tufanbarisyildirim/gonginx v0.0.0-20250620092546-c3e307e36701 // latest tag is too old.
 -	github.com/unrolled/render v1.0.2
 -	github.com/unrolled/secure v1.0.9
--	github.com/valyala/fasthttp v1.69.0
--	github.com/vulcand/oxy/v2 v2.1.0
 +	github.com/unrolled/render v1.7.0
 +	github.com/unrolled/secure v1.17.0
-+	github.com/valyala/fasthttp v1.72.0
+ 	github.com/valyala/fasthttp v1.73.0
+-	github.com/vulcand/oxy/v2 v2.1.0
 +	github.com/vulcand/oxy/v2 v2.2.0
  	github.com/vulcand/predicate v1.3.0
  	github.com/yuin/gopher-lua v1.1.1
@@ -188,9 +180,8 @@ diff -up traefik-3.7.11/go.mod.deps~ traefik-3.7.11/go.mod
  // Containous forks
  replace (
  	github.com/abbot/go-http-auth => github.com/containous/go-http-auth v0.4.1-0.20260804094822-b975dcaa8c48
-diff -up traefik-3.7.11/go.sum.deps~ traefik-3.7.11/go.sum
---- traefik-3.7.11/go.sum.deps~	2026-08-19 08:44:17.000000000 +0200
-+++ traefik-3.7.11/go.sum	2026-08-19 21:23:01.020239792 +0200
+--- traefik-3.7.12/go.sum	2026-08-26 15:41:51.000000000 +0200
++++ traefik-3.7.12/go.sum	2026-08-31 21:03:25.986979627 +0200
 @@ -645,15 +645,15 @@ github.com/JohnCGriffin/overflow v0.0.0-
  github.com/Knetic/govaluate v3.0.1-0.20171022003610-9aa49832a739+incompatible/go.mod h1:r7JcOSlj0wfOMncg0iLm8Leh48TZaKVeNIfJntJ2wa0=
  github.com/Masterminds/goutils v1.1.1 h1:5nUrii3FMTL5diU80unEVvNevw1nH4+ZV4DSLVJLSYI=
@@ -210,15 +201,7 @@ diff -up traefik-3.7.11/go.sum.deps~ traefik-3.7.11/go.sum
  github.com/Shopify/sarama v1.19.0/go.mod h1:FVkBWblsNy7DGZRfXLU0O9RCGt5g3g3yEuWXgklEdEo=
  github.com/Shopify/sarama v1.30.1/go.mod h1:hGgx05L/DiW8XYBXeJdKIN6V2QUy2H6JqME5VT1NLRw=
  github.com/Shopify/toxiproxy v2.1.4+incompatible/go.mod h1:OXgGpZ6Cli1/URJOF1DMxUHB2q5Ap20/P/eIdh4G0pI=
-@@ -724,12 +724,14 @@ github.com/aliyun/credentials-go v1.4.5/
- github.com/aliyun/credentials-go v1.4.7 h1:T17dLqEtPUFvjDRRb5giVvLh6dFT8IcNFJJb7MeyCxw=
- github.com/aliyun/credentials-go v1.4.7/go.mod h1:Jm6d+xIgwJVLVWT561vy67ZRP4lPTQxMbEYRuT2Ti1U=
- github.com/andybalholm/brotli v1.0.4/go.mod h1:fO7iG3H7G2nSZ7m0zPUDn85XEX2GTukHGRSepvi9Eig=
--github.com/andybalholm/brotli v1.2.0 h1:ukwgCxwYrmACq68yiUqwIWnGY0cTPox/M94sVwToPjQ=
--github.com/andybalholm/brotli v1.2.0/go.mod h1:rzTDkvFWvIrjDXZHkuS16NPggd91W3kUSvPlQ1pLaKY=
-+github.com/andybalholm/brotli v1.2.2 h1:HzTuoo2ErYQqf5qvcJInB8uvqSVxRttzkFexPWtnceM=
-+github.com/andybalholm/brotli v1.2.2/go.mod h1:rzTDkvFWvIrjDXZHkuS16NPggd91W3kUSvPlQ1pLaKY=
- github.com/antihax/optional v1.0.0/go.mod h1:uupD/76wgC+ih3iEmQUL+0Ugr19nfwCT1kdvxnR2qWY=
+@@ -730,6 +730,8 @@ github.com/antihax/optional v1.0.0/go.mo
  github.com/apache/arrow/go/v10 v10.0.1/go.mod h1:YvhnlEePVnBS4+0z3fhPfUy7W1Ikj0Ih0vcRo/gZ1M0=
  github.com/apache/arrow/go/v11 v11.0.0/go.mod h1:Eg5OsL5H+e299f7u5ssuXsuHQVEGC4xei5aX110hRiI=
  github.com/apache/thrift v0.16.0/go.mod h1:PHK3hniurgQaNMZYaCLEqXKsYK8upmhPbmdP2FXSqgU=
@@ -501,7 +484,7 @@ diff -up traefik-3.7.11/go.sum.deps~ traefik-3.7.11/go.sum
  github.com/julienschmidt/httprouter v1.2.0/go.mod h1:SYymIcj16QtmaHHD7aYtjjsJG7VTCxuUUipMqKk8s4w=
  github.com/julienschmidt/httprouter v1.3.0/go.mod h1:JR6WtHb+2LUe8TCKY3cZOxFyyO8IZAc4RVcycCCAKdM=
  github.com/jung-kurt/gofpdf v1.0.0/go.mod h1:7Id9E/uU8ce6rXgefFLlgrJj/GYY22cpxn+r32jIOes=
-@@ -1458,12 +1420,11 @@ github.com/kisielk/errcheck v1.1.0/go.mo
+@@ -1458,7 +1420,6 @@ github.com/kisielk/errcheck v1.1.0/go.mo
  github.com/kisielk/errcheck v1.5.0/go.mod h1:pFxgyoBC7bSaBwPgfKdkLd5X25qrDl4LWUI2bnpBCr8=
  github.com/kisielk/gotool v1.0.0/go.mod h1:XhKaO+MFFWcvkIS/tQcRk01m1F5IRFswLeQ+oQHNcck=
  github.com/klauspost/asmfmt v1.3.2/go.mod h1:AG8TuvYojzulgDAMCnYn50l/5QV3Bs/tp6j0HLHbNSE=
@@ -509,14 +492,7 @@ diff -up traefik-3.7.11/go.sum.deps~ traefik-3.7.11/go.sum
  github.com/klauspost/compress v1.13.4/go.mod h1:8dP1Hq4DHOhN9w426knH3Rhby4rFm6D8eO+e+Dq5Gzg=
  github.com/klauspost/compress v1.13.6/go.mod h1:/3/Vjq9QcHkK5uEr5lBEmyoZ1iFhe47etQ6QUkpK6sk=
  github.com/klauspost/compress v1.15.9/go.mod h1:PhcZ0MbTNciWF3rruxRgKxI5NkcHHrHUDtV4Yw2GlzU=
--github.com/klauspost/compress v1.18.7 h1:aUyZsS4kH3QTKurYhAOwAHxllVPnOthb3vPfnF1Ehjw=
--github.com/klauspost/compress v1.18.7/go.mod h1:cwPg85FWrGar70rWktvGQj8/hthj3wpl0PGDogxkrSQ=
-+github.com/klauspost/compress v1.19.0 h1:sXLILfc9jV2QYWkzFOPWStmcUVH2RHEB1JCdY2oVvCQ=
-+github.com/klauspost/compress v1.19.0/go.mod h1:cwPg85FWrGar70rWktvGQj8/hthj3wpl0PGDogxkrSQ=
- github.com/klauspost/cpuid/v2 v2.0.9/go.mod h1:FInQzS24/EEf25PyTYn52gqo7WaD8xa0213Md/qVLRg=
- github.com/klauspost/cpuid/v2 v2.2.10 h1:tBs3QSyvjDyFTq3uoc/9xFpCuOsJQFNPiAhYdw2skhE=
- github.com/klauspost/cpuid/v2 v2.2.10/go.mod h1:hqwkgyIinND0mEev00jJYCxPNVRVXFQeu1XKlok6oO0=
-@@ -1499,27 +1460,15 @@ github.com/labbsr0x/bindman-dns-webhook
+@@ -1499,21 +1460,9 @@ github.com/labbsr0x/bindman-dns-webhook
  github.com/labbsr0x/bindman-dns-webhook v1.0.2/go.mod h1:p6b+VCXIR8NYKpDr8/dg1HKfQoRHCdcsROXKvmoehKA=
  github.com/labbsr0x/goh v1.0.1 h1:97aBJkDjpyBZGPbQuOK5/gHcSFbcr5aRsq3RSRJFpPk=
  github.com/labbsr0x/goh v1.0.1/go.mod h1:8K2UhVoaWXcCU7Lxoa2omWnC8gyW8px7/lmO61c027w=
@@ -538,13 +514,6 @@ diff -up traefik-3.7.11/go.sum.deps~ traefik-3.7.11/go.sum
  github.com/linode/linodego v1.69.1 h1:f45N2MHR/oece2/ktTTCYmrlfse4//k3NgwcF5zbGZ0=
  github.com/linode/linodego v1.69.1/go.mod h1:Fha0NYsQSx5VZK1HQNJY/z/dIxxkFp+vb5veawbmAUw=
  github.com/liquidweb/go-lwApi v0.0.0-20190605172801-52a4864d2738/go.mod h1:0sYF9rMXb0vlG+4SzdiGMXHheCZxjguMq+Zb4S2BfBs=
- github.com/liquidweb/go-lwApi v0.0.5/go.mod h1:0sYF9rMXb0vlG+4SzdiGMXHheCZxjguMq+Zb4S2BfBs=
- github.com/liquidweb/liquidweb-cli v0.6.9/go.mod h1:cE1uvQ+x24NGUL75D0QagOFCG8Wdvmwu8aL9TLmA/eQ=
--github.com/liquidweb/liquidweb-cli v0.7.0 h1:7j1r1U0MZa1TXiWo3IMU5V1YQwnBHMVxU+xLsgDcu6Q=
-+github.com/liquidweb/liquidweb-cli v0.7.0 h1:H+tBJWNa/sFSUf5UIc7pRcWkZF8lYcdYOUGOwCzz/Fg=
- github.com/liquidweb/liquidweb-cli v0.7.0/go.mod h1:+uU7L6BhaQtgo4cYKhhsP5UNCq/imNvjBjlf76Vqpb0=
- github.com/liquidweb/liquidweb-go v1.6.4 h1:6S0m3hHSpiLqGD7AFSb7lH/W/qr1wx+tKil9fgIbjMc=
- github.com/liquidweb/liquidweb-go v1.6.4/go.mod h1:B934JPIIcdA+uTq2Nz5PgOtG6CuCaEvQKe/Ge/5GgZ4=
 @@ -1535,30 +1484,22 @@ github.com/magiconair/properties v1.8.10
  github.com/magiconair/properties v1.8.10/go.mod h1:Dhd985XPs7jluiymwWYZ0G4Z61jb3vdS329zhj2hYo0=
  github.com/mailgun/multibuf v0.2.0 h1:pGhv93r0GXBVTDu6RMlA9GUQjwwoy4yspIujtaT0AOA=
@@ -716,12 +685,10 @@ diff -up traefik-3.7.11/go.sum.deps~ traefik-3.7.11/go.sum
 -github.com/urfave/negroni v1.0.0/go.mod h1:Meg73S6kFm/4PpbYdq35yYWoCZ9mS/YSx+lKnmiohz4=
  github.com/valyala/bytebufferpool v1.0.0 h1:GqA5TC/0021Y/b9FG4Oi9Mr3q7XYx6KllzawFIhcdPw=
  github.com/valyala/bytebufferpool v1.0.0/go.mod h1:6bBcMArwyJ5K/AmCkWv1jt77kVWyCJ6HpOuEn7z0Csc=
--github.com/valyala/fasthttp v1.69.0 h1:fNLLESD2SooWeh2cidsuFtOcrEi4uB4m1mPrkJMZyVI=
--github.com/valyala/fasthttp v1.69.0/go.mod h1:4wA4PfAraPlAsJ5jMSqCE2ug5tqUPwKXxVj8oNECGcw=
+ github.com/valyala/fasthttp v1.73.0 h1:ocTOORnBWtJ+P8t/6wAjdkchMzdfHmWx2VD/DPbgZ7s=
+ github.com/valyala/fasthttp v1.73.0/go.mod h1:EtXQDHaR+5P18p8wqDRFpUhxr108Ga9mXvVJXHRrN2k=
 -github.com/valyala/fasttemplate v1.0.1/go.mod h1:UQGH1tvbgY+Nz5t2n7tXsz52dQxojPUpymEIMZ47gx8=
 -github.com/valyala/fasttemplate v1.2.1/go.mod h1:KHLXt3tVN2HBp8eijSv/kGJopbvo7S+qRAEEKiv+SiQ=
-+github.com/valyala/fasthttp v1.72.0 h1:R7kYdoWhn1ye1fVpP+cDHDJwYm3NkwLliwgzJ/Abg7M=
-+github.com/valyala/fasthttp v1.72.0/go.mod h1:zsbLTYqcpIktdQytlVBwIjY9La5d6bs990nBxWg8efk=
  github.com/vinyldns/go-vinyldns v0.9.18 h1:U3Nl1NEeqhbaQ4W1+V6Qm6iSmAEfEHaOgN/zSV4DtNY=
  github.com/vinyldns/go-vinyldns v0.9.18/go.mod h1:pwWhE9K/leGDOIduVhRGvQ3ecVMHWRfEnKYUTEU3gB4=
  github.com/vmihailenco/msgpack/v5 v5.4.1 h1:cQriyiUvjTwOHg8QZaPihLWeRAAVoCpE00IUPn0Bjt8=
@@ -849,9 +816,8 @@ diff -up traefik-3.7.11/go.sum.deps~ traefik-3.7.11/go.sum
  pgregory.net/rapid v1.2.0 h1:keKAYRcjm+e1F0oAuU5F5+YPAWcyxNNRK2wud503Gnk=
  pgregory.net/rapid v1.2.0/go.mod h1:PY5XlDGj0+V1FCq0o192FdRhpKHGTRIWBgqjDBTrq04=
  rsc.io/binaryregexp v0.2.0/go.mod h1:qTv7/COck+e2FymRvadv62gMdZztPaShugOCi3I+8D8=
-diff -up traefik-3.7.11/pkg/middlewares/headers/secure.go.deps~ traefik-3.7.11/pkg/middlewares/headers/secure.go
---- traefik-3.7.11/pkg/middlewares/headers/secure.go.deps~	2026-08-19 08:44:17.000000000 +0200
-+++ traefik-3.7.11/pkg/middlewares/headers/secure.go	2026-08-19 21:21:46.204445031 +0200
+--- traefik-3.7.12/pkg/middlewares/headers/secure.go	2026-08-26 15:41:51.000000000 +0200
++++ traefik-3.7.12/pkg/middlewares/headers/secure.go	2026-08-31 21:01:21.552213669 +0200
 @@ -29,7 +29,6 @@ func newSecure(next http.Handler, cfg dy
  		ContentSecurityPolicyReportOnly: cfg.ContentSecurityPolicyReportOnly,
  		CustomBrowserXssValue:           cfg.CustomBrowserXSSValue,
@@ -887,9 +853,9 @@ diff -up traefik-3.7.11/pkg/middlewares/headers/secure.go.deps~ traefik-3.7.11/p
 +
 +	return nil
 +}
-diff -ruN traefik-3.7.11/third_party/grpc-web/LICENSE.txt
---- traefik-3.7.11/third_party/grpc-web/LICENSE.txt	1970-01-01 01:00:00.000000000 +0100
-+++ traefik-3.7.11/third_party/grpc-web/LICENSE.txt	2026-08-19 21:21:46.204523278 +0200
+diff -ruN traefik-3.7.12/third_party/grpc-web/LICENSE.txt traefik-3.7.12/third_party/grpc-web/LICENSE.txt
+--- traefik-3.7.12/third_party/grpc-web/LICENSE.txt	1970-01-01 01:00:00.000000000 +0100
++++ traefik-3.7.12/third_party/grpc-web/LICENSE.txt	2026-08-31 21:01:21.552285690 +0200
 @@ -0,0 +1,174 @@
 +                                Apache License
 +                           Version 2.0, January 2004
@@ -1066,9 +1032,9 @@ diff -ruN traefik-3.7.11/third_party/grpc-web/LICENSE.txt
 +      incurred by, or claims asserted against, such Contributor by reason
 +      of your accepting any such warranty or additional liability.
 \ No newline at end of file
-diff -ruN traefik-3.7.11/third_party/grpc-web/go/grpcweb/DOC.md
---- traefik-3.7.11/third_party/grpc-web/go/grpcweb/DOC.md	1970-01-01 01:00:00.000000000 +0100
-+++ traefik-3.7.11/third_party/grpc-web/go/grpcweb/DOC.md	2026-08-19 21:21:46.204605785 +0200
+diff -ruN traefik-3.7.12/third_party/grpc-web/go/grpcweb/DOC.md traefik-3.7.12/third_party/grpc-web/go/grpcweb/DOC.md
+--- traefik-3.7.12/third_party/grpc-web/go/grpcweb/DOC.md	1970-01-01 01:00:00.000000000 +0100
++++ traefik-3.7.12/third_party/grpc-web/go/grpcweb/DOC.md	2026-08-31 21:01:21.552367341 +0200
 @@ -0,0 +1,315 @@
 +# grpcweb
 +--
@@ -1385,9 +1351,9 @@ diff -ruN traefik-3.7.11/third_party/grpc-web/go/grpcweb/DOC.md
 +
 +You can control the CORS behaviour using `With*` options in the WrapServer
 +function.
-diff -ruN traefik-3.7.11/third_party/grpc-web/go/grpcweb/doc.go
---- traefik-3.7.11/third_party/grpc-web/go/grpcweb/doc.go	1970-01-01 01:00:00.000000000 +0100
-+++ traefik-3.7.11/third_party/grpc-web/go/grpcweb/doc.go	2026-08-19 21:21:46.204640839 +0200
+diff -ruN traefik-3.7.12/third_party/grpc-web/go/grpcweb/doc.go traefik-3.7.12/third_party/grpc-web/go/grpcweb/doc.go
+--- traefik-3.7.12/third_party/grpc-web/go/grpcweb/doc.go	1970-01-01 01:00:00.000000000 +0100
++++ traefik-3.7.12/third_party/grpc-web/go/grpcweb/doc.go	2026-08-31 21:01:21.552402961 +0200
 @@ -0,0 +1,29 @@
 +// Copyright 2017 Improbable. All Rights Reserved.
 +// See LICENSE for licensing terms.
@@ -1418,9 +1384,9 @@ diff -ruN traefik-3.7.11/third_party/grpc-web/go/grpcweb/doc.go
 +
 +*/
 +package grpcweb
-diff -ruN traefik-3.7.11/third_party/grpc-web/go/grpcweb/grpc_web_response.go
---- traefik-3.7.11/third_party/grpc-web/go/grpcweb/grpc_web_response.go	1970-01-01 01:00:00.000000000 +0100
-+++ traefik-3.7.11/third_party/grpc-web/go/grpcweb/grpc_web_response.go	2026-08-19 21:21:46.204685053 +0200
+diff -ruN traefik-3.7.12/third_party/grpc-web/go/grpcweb/grpc_web_response.go traefik-3.7.12/third_party/grpc-web/go/grpcweb/grpc_web_response.go
+--- traefik-3.7.12/third_party/grpc-web/go/grpcweb/grpc_web_response.go	1970-01-01 01:00:00.000000000 +0100
++++ traefik-3.7.12/third_party/grpc-web/go/grpcweb/grpc_web_response.go	2026-08-31 21:01:21.552444602 +0200
 @@ -0,0 +1,170 @@
 +//Copyright 2017 Improbable. All Rights Reserved.
 +// See LICENSE for licensing terms.
@@ -1592,9 +1558,9 @@ diff -ruN traefik-3.7.11/third_party/grpc-web/go/grpcweb/grpc_web_response.go
 +
 +	f.Flush()
 +}
-diff -ruN traefik-3.7.11/third_party/grpc-web/go/grpcweb/header.go
---- traefik-3.7.11/third_party/grpc-web/go/grpcweb/header.go	1970-01-01 01:00:00.000000000 +0100
-+++ traefik-3.7.11/third_party/grpc-web/go/grpcweb/header.go	2026-08-19 21:21:46.204733977 +0200
+diff -ruN traefik-3.7.12/third_party/grpc-web/go/grpcweb/header.go traefik-3.7.12/third_party/grpc-web/go/grpcweb/header.go
+--- traefik-3.7.12/third_party/grpc-web/go/grpcweb/header.go	1970-01-01 01:00:00.000000000 +0100
++++ traefik-3.7.12/third_party/grpc-web/go/grpcweb/header.go	2026-08-31 21:01:21.552487492 +0200
 @@ -0,0 +1,140 @@
 +//Copyright 2018 Improbable. All Rights Reserved.
 +// See LICENSE for licensing terms.
@@ -1736,9 +1702,9 @@ diff -ruN traefik-3.7.11/third_party/grpc-web/go/grpcweb/header.go
 +	}
 +	return keys
 +}
-diff -ruN traefik-3.7.11/third_party/grpc-web/go/grpcweb/health.go
---- traefik-3.7.11/third_party/grpc-web/go/grpcweb/health.go	1970-01-01 01:00:00.000000000 +0100
-+++ traefik-3.7.11/third_party/grpc-web/go/grpcweb/health.go	2026-08-19 21:21:46.204762110 +0200
+diff -ruN traefik-3.7.12/third_party/grpc-web/go/grpcweb/health.go traefik-3.7.12/third_party/grpc-web/go/grpcweb/health.go
+--- traefik-3.7.12/third_party/grpc-web/go/grpcweb/health.go	1970-01-01 01:00:00.000000000 +0100
++++ traefik-3.7.12/third_party/grpc-web/go/grpcweb/health.go	2026-08-31 21:01:21.552520863 +0200
 @@ -0,0 +1,65 @@
 +package grpcweb
 +
@@ -1805,9 +1771,9 @@ diff -ruN traefik-3.7.11/third_party/grpc-web/go/grpcweb/health.go
 +		}
 +	}
 +}
-diff -ruN traefik-3.7.11/third_party/grpc-web/go/grpcweb/helpers.go
---- traefik-3.7.11/third_party/grpc-web/go/grpcweb/helpers.go	1970-01-01 01:00:00.000000000 +0100
-+++ traefik-3.7.11/third_party/grpc-web/go/grpcweb/helpers.go	2026-08-19 21:21:46.204787892 +0200
+diff -ruN traefik-3.7.12/third_party/grpc-web/go/grpcweb/helpers.go traefik-3.7.12/third_party/grpc-web/go/grpcweb/helpers.go
+--- traefik-3.7.12/third_party/grpc-web/go/grpcweb/helpers.go	1970-01-01 01:00:00.000000000 +0100
++++ traefik-3.7.12/third_party/grpc-web/go/grpcweb/helpers.go	2026-08-31 21:01:21.552545953 +0200
 @@ -0,0 +1,50 @@
 +//Copyright 2017 Improbable. All Rights Reserved.
 +// See LICENSE for licensing terms.
@@ -1859,9 +1825,9 @@ diff -ruN traefik-3.7.11/third_party/grpc-web/go/grpcweb/helpers.go
 +
 +	return endpoint
 +}
-diff -ruN traefik-3.7.11/third_party/grpc-web/go/grpcweb/options.go
---- traefik-3.7.11/third_party/grpc-web/go/grpcweb/options.go	1970-01-01 01:00:00.000000000 +0100
-+++ traefik-3.7.11/third_party/grpc-web/go/grpcweb/options.go	2026-08-19 21:21:46.204835566 +0200
+diff -ruN traefik-3.7.12/third_party/grpc-web/go/grpcweb/options.go traefik-3.7.12/third_party/grpc-web/go/grpcweb/options.go
+--- traefik-3.7.12/third_party/grpc-web/go/grpcweb/options.go	1970-01-01 01:00:00.000000000 +0100
++++ traefik-3.7.12/third_party/grpc-web/go/grpcweb/options.go	2026-08-31 21:01:21.552593524 +0200
 @@ -0,0 +1,181 @@
 +//Copyright 2017 Improbable. All Rights Reserved.
 +// See LICENSE for licensing terms.
@@ -2044,9 +2010,9 @@ diff -ruN traefik-3.7.11/third_party/grpc-web/go/grpcweb/options.go
 +		o.websocketCompressionMode = compressionMode
 +	}
 +}
-diff -ruN traefik-3.7.11/third_party/grpc-web/go/grpcweb/trailer.go
---- traefik-3.7.11/third_party/grpc-web/go/grpcweb/trailer.go	1970-01-01 01:00:00.000000000 +0100
-+++ traefik-3.7.11/third_party/grpc-web/go/grpcweb/trailer.go	2026-08-19 21:21:46.204864249 +0200
+diff -ruN traefik-3.7.12/third_party/grpc-web/go/grpcweb/trailer.go traefik-3.7.12/third_party/grpc-web/go/grpcweb/trailer.go
+--- traefik-3.7.12/third_party/grpc-web/go/grpcweb/trailer.go	1970-01-01 01:00:00.000000000 +0100
++++ traefik-3.7.12/third_party/grpc-web/go/grpcweb/trailer.go	2026-08-31 21:01:21.552620174 +0200
 @@ -0,0 +1,32 @@
 +//Copyright 2018 Improbable. All Rights Reserved.
 +// See LICENSE for licensing terms.
@@ -2080,9 +2046,9 @@ diff -ruN traefik-3.7.11/third_party/grpc-web/go/grpcweb/trailer.go
 +	}
 +	return v[0]
 +}
-diff -ruN traefik-3.7.11/third_party/grpc-web/go/grpcweb/websocket_wrapper.go
---- traefik-3.7.11/third_party/grpc-web/go/grpcweb/websocket_wrapper.go	1970-01-01 01:00:00.000000000 +0100
-+++ traefik-3.7.11/third_party/grpc-web/go/grpcweb/websocket_wrapper.go	2026-08-19 21:21:46.204925454 +0200
+diff -ruN traefik-3.7.12/third_party/grpc-web/go/grpcweb/websocket_wrapper.go traefik-3.7.12/third_party/grpc-web/go/grpcweb/websocket_wrapper.go
+--- traefik-3.7.12/third_party/grpc-web/go/grpcweb/websocket_wrapper.go	1970-01-01 01:00:00.000000000 +0100
++++ traefik-3.7.12/third_party/grpc-web/go/grpcweb/websocket_wrapper.go	2026-08-31 21:01:21.552673434 +0200
 @@ -0,0 +1,241 @@
 +package grpcweb
 +
@@ -2325,9 +2291,9 @@ diff -ruN traefik-3.7.11/third_party/grpc-web/go/grpcweb/websocket_wrapper.go
 +	// http.Header and textproto.MIMEHeader are both just a map[string][]string
 +	return http.Header(mimeHeader), nil
 +}
-diff -ruN traefik-3.7.11/third_party/grpc-web/go/grpcweb/wrapper.go
---- traefik-3.7.11/third_party/grpc-web/go/grpcweb/wrapper.go	1970-01-01 01:00:00.000000000 +0100
-+++ traefik-3.7.11/third_party/grpc-web/go/grpcweb/wrapper.go	2026-08-19 21:21:46.204999801 +0200
+diff -ruN traefik-3.7.12/third_party/grpc-web/go/grpcweb/wrapper.go traefik-3.7.12/third_party/grpc-web/go/grpcweb/wrapper.go
+--- traefik-3.7.12/third_party/grpc-web/go/grpcweb/wrapper.go	1970-01-01 01:00:00.000000000 +0100
++++ traefik-3.7.12/third_party/grpc-web/go/grpcweb/wrapper.go	2026-08-31 21:01:21.552745155 +0200
 @@ -0,0 +1,309 @@
 +//Copyright 2017 Improbable. All Rights Reserved.
 +// See LICENSE for licensing terms.
@@ -2638,9 +2604,9 @@ diff -ruN traefik-3.7.11/third_party/grpc-web/go/grpcweb/wrapper.go
 +	}
 +	return origin == req.Host
 +}
-diff -ruN traefik-3.7.11/third_party/grpc-web/go.mod
---- traefik-3.7.11/third_party/grpc-web/go.mod	1970-01-01 01:00:00.000000000 +0100
-+++ traefik-3.7.11/third_party/grpc-web/go.mod	2026-08-19 21:21:46.205028994 +0200
+diff -ruN traefik-3.7.12/third_party/grpc-web/go.mod traefik-3.7.12/third_party/grpc-web/go.mod
+--- traefik-3.7.12/third_party/grpc-web/go.mod	1970-01-01 01:00:00.000000000 +0100
++++ traefik-3.7.12/third_party/grpc-web/go.mod	2026-08-31 21:01:21.552773096 +0200
 @@ -0,0 +1,19 @@
 +module github.com/traefik/grpc-web
 +
@@ -2661,9 +2627,9 @@ diff -ruN traefik-3.7.11/third_party/grpc-web/go.mod
 +	google.golang.org/genproto/googleapis/rpc v0.0.0-20260414002931-afd174a4e478 // indirect
 +	google.golang.org/protobuf v1.36.11 // indirect
 +)
-diff -ruN traefik-3.7.11/third_party/grpc-web/go.sum
---- traefik-3.7.11/third_party/grpc-web/go.sum	1970-01-01 01:00:00.000000000 +0100
-+++ traefik-3.7.11/third_party/grpc-web/go.sum	2026-08-19 21:21:46.205060886 +0200
+diff -ruN traefik-3.7.12/third_party/grpc-web/go.sum traefik-3.7.12/third_party/grpc-web/go.sum
+--- traefik-3.7.12/third_party/grpc-web/go.sum	1970-01-01 01:00:00.000000000 +0100
++++ traefik-3.7.12/third_party/grpc-web/go.sum	2026-08-31 21:01:21.552805126 +0200
 @@ -0,0 +1,46 @@
 +github.com/cenkalti/backoff/v4 v4.3.0 h1:MyRJ/UdXutAwSAT+s3wNd7MfTIcy71VQueUuFK343L8=
 +github.com/cenkalti/backoff/v4 v4.3.0/go.mod h1:Y3VNntkOUPxTVeUxJ/G5vcM//AlwfmyYozVcomhLiZE=
