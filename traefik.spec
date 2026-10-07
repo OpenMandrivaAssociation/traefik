@@ -5,7 +5,7 @@
 %global traefik_webuidir %{_datadir}/traefik/webui
 
 Name:		traefik
-Version:	3.7.12
+Version:	3.7.14
 Release:	1
 Source0:	https://github.com/traefik/traefik/releases/download/v%{version}/traefik-v%{version}.src.tar.gz
 Source1:	vendor.tar.xz
@@ -30,7 +30,6 @@ Requires:	traefik-mod-ecs = %{EVRD}
 Requires:	traefik-mod-webui = %{EVRD}
 
 %patchlist
-traefik-3.6.8-fix-bogus-deps.patch
 traefik-modular.patch
 
 %description
