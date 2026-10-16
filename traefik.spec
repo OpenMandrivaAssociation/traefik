@@ -5,7 +5,7 @@
 %global traefik_webuidir %{_datadir}/traefik/webui
 
 Name:		traefik
-Version:	3.7.14
+Version:	3.7.15
 Release:	1
 Source0:	https://github.com/traefik/traefik/releases/download/v%{version}/traefik-v%{version}.src.tar.gz
 Source1:	vendor.tar.xz
