@@ -1,3 +1,3 @@
 sources:
-  traefik-v3.7.15.src.tar.gz: 05905b60fe14356f9637f0a29905398e0afc310c
-  vendor.tar.xz: cfaf895e89266988f63885c0b124946b8401fb74
+  traefik-v3.7.17.src.tar.gz: 2d7ad05f2fea4b02ef0f956cc3129c425698f997
+  vendor.tar.xz: 48d73864498a6014515afd1a990ee15dca57c488
